@@ -1,0 +1,27 @@
+4a. data barang yang lebih besar dari 10000 diurutkan berdasarkan asc/desc
+select * from barang
+where harga > 10000
+order by harga;
+
+
+4b. data pelanggan dengan nama yang menggandung huruf g dan beralamat di bandung
+select * from pelanggan
+where nama like "%g%" and alamat = "bandung";
+
+
+4c. data transaksi sesuai contoh
+select  a.kode, a.tanggal, b.nama as nama_pelanggan, c.nama as nama_barang,
+a.jumlah_barang as jumlah, c.harga as harga_satuan , concat(a.jumlah_barang * c.harga)
+as total from transaksi as a
+join pelanggan as b on a.kode_pelanggan=b.kode
+join barang as c on a.kode_barang = c.kode
+order by b.nama, tanggal;
+
+
+4d. rekap nama jumlah dan total harga pembelian pelanggan sesuai contoh
+select b.nama as nama_pelanggan, sum(a.jumlah_barang) as jumlah, sum(a.jumlah_barang * c.harga) as total_harga
+from transaksi as a
+join pelanggan as b on a.kode_pelanggan = b.kode
+join barang as c on a.kode_barang = c.kode
+group by b.nama
+order by b.nama;
